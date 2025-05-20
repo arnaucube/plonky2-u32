@@ -272,7 +272,7 @@ mod tests {
         const D: usize = 4;
         const AUX_LIMB_BITS: usize = 2;
         const BASE: usize = 1 << AUX_LIMB_BITS;
-        const AUX_LIMBS_PER_INPUT_LIMB: usize = (32 + AUX_LIMB_BITS - 1) / AUX_LIMB_BITS;
+        const AUX_LIMBS_PER_INPUT_LIMB: usize = 32_usize.div_ceil(AUX_LIMB_BITS);
 
         fn get_wires(input_limbs: Vec<u64>) -> Vec<FF> {
             let num_input_limbs = input_limbs.len();
