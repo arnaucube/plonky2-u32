@@ -2,8 +2,8 @@ use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 use alloc::{format, vec};
 use anyhow::Result;
-use num::integer::div_ceil;
 use core::marker::PhantomData;
+use num::integer::div_ceil;
 use plonky2::plonk::circuit_data::CommonCircuitData;
 use plonky2::util::serialization::{Buffer, IoResult, Read, Write};
 
@@ -196,7 +196,11 @@ impl<F: RichField + Extendable<D>, const D: usize> SimpleGenerator<F, D>
             .collect()
     }
 
-    fn run_once(&self, witness: &PartitionWitness<F>, out_buffer: &mut GeneratedValues<F>) -> Result<()> {
+    fn run_once(
+        &self,
+        witness: &PartitionWitness<F>,
+        out_buffer: &mut GeneratedValues<F>,
+    ) -> Result<()> {
         let num_input_limbs = self.gate.num_input_limbs;
         for i in 0..num_input_limbs {
             let sum_value = witness
@@ -268,7 +272,7 @@ mod tests {
         const D: usize = 4;
         const AUX_LIMB_BITS: usize = 2;
         const BASE: usize = 1 << AUX_LIMB_BITS;
-        const AUX_LIMBS_PER_INPUT_LIMB: usize = (32 + AUX_LIMB_BITS - 1)/AUX_LIMB_BITS;
+        const AUX_LIMBS_PER_INPUT_LIMB: usize = (32 + AUX_LIMB_BITS - 1) / AUX_LIMB_BITS;
 
         fn get_wires(input_limbs: Vec<u64>) -> Vec<FF> {
             let num_input_limbs = input_limbs.len();
