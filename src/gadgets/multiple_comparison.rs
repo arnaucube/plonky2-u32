@@ -1,11 +1,11 @@
 use alloc::vec;
 use alloc::vec::Vec;
 
+use num::integer::div_ceil;
 use plonky2::field::extension::Extendable;
 use plonky2::hash::hash_types::RichField;
 use plonky2::iop::target::{BoolTarget, Target};
 use plonky2::plonk::circuit_builder::CircuitBuilder;
-use plonky2::util::ceil_div_usize;
 
 use crate::gadgets::arithmetic_u32::U32Target;
 use crate::gates::comparison::ComparisonGate;
@@ -26,7 +26,7 @@ pub fn list_le_circuit<F: RichField + Extendable<D>, const D: usize>(
     let n = a.len();
 
     let chunk_bits = 2;
-    let num_chunks = ceil_div_usize(num_bits, chunk_bits);
+    let num_chunks = div_ceil(num_bits, chunk_bits);
 
     let one = builder.one();
     let mut result = one;
